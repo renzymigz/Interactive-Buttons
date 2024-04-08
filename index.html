@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Buttons</title>
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/all.css">
+</head>
+
+<style>
+    @import url('https://fonts.cdnfonts.com/css/helvetica-neue-5');
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family:'Helvetica Neue', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            overflow-x: hidden;
+            transition: background-color 0.5s;
+            animation: popupcontainer 0.1s ease;
+        }
+
+        @keyframes popupcontainer {
+            0% { transform: scale(0)}
+            50% { transform: scale(1.1)  }
+            100% { transform: scale(1) }
+        }
+
+
+        #section {
+            height: 100%;
+            width: 630px;
+            display: block;
+            margin: 0 auto;
+            background-color: rgb(255, 255, 255);
+            box-shadow: 0px 0px 20px;
+            border-radius: 10px;
+            transition: background-color 0.15s ease-in-out;
+        }
+
+        .header {
+            background-color: rgb(242, 242, 242);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: background-color 0.15s ease-in-out;
+        }
+
+        .text-header{
+            margin-left: 40px;
+            text-align: left;
+            position: relative;
+            font-size: 8px;
+            padding: 5px;
+        }
+
+        .text-header i{
+            position: absolute;
+            font-size: 15px;
+            transform: translate(-40px, 0px);
+            color: rgb(0, 0, 0);
+            padding: 8px;
+            transition: background-color, 0.15s ease-in-out;
+        }
+
+        .text-header i:hover{
+            background-color: rgb(200, 200, 200);
+            border-radius: 1000px;
+        }
+
+        .text-header h2{
+            color: grey;
+            font-weight: normal;
+        }
+
+        .banner{
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .follow-button{
+            position: absolute;
+            transform: translate(530px, -42px);
+            font-size: 15px;
+            color: white;
+            background-color: black;
+            padding: 10px 18px 10px 18px;
+            border-radius: 40px;
+            font-weight: bold;
+            border-style: none;
+            transition: background-color 0.15s ease-in-out;
+            cursor: pointer;
+        }
+
+        .follow-button:hover{
+            background-color: rgb(54, 54, 54);
+        }
+
+        /* proifle image */
+
+        .profile-image {
+            position: absolute;
+            transform: translate(15px, -130px);
+            border: 4px solid white;
+            border-radius: 1000px;
+        }
+
+        .profile-image img {
+            width: 130px;
+            height: 130px;
+            border-radius: 100px;
+            transition: filter 0.15s ease-in-out;
+            cursor: pointer;
+        }
+
+        .profile-image img:hover {
+            filter: brightness(0.7);
+        }
+
+        .model-banner,
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 800px;
+        }
+
+        .modal-content img {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            position: absolute;
+            border-radius: 1000px;
+        }
+
+        .modal-content-banner img {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            position: absolute;
+            width: 1400px;
+        }
+
+        .close {
+            color: #ccc;
+            float: right;
+            font-size: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.15s ease-in-out;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #fff;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* name */
+
+        .name-bio{
+            position: relative;
+            margin-top: 50px;
+            padding: 15px;
+            font-size: 10px;
+        }
+
+        .name-bio h3{
+            color: grey;
+            font-weight: normal;
+            font-size: 13px;
+        }
+
+        .name-bio p{
+            font-size: 13px;
+            padding-top: 14px;
+            padding-bottom: 14px;
+        }
+
+        .name-hashtag {
+            color: rgb(31, 163, 215);
+        }
+
+        .name-bio h2{
+            padding-top: 10px;
+            font-size: 13px;
+        }
+
+
+        #following-followers{
+            font-weight: normal;
+            color: rgb(150, 150, 150);
+        }
+
+        .following-followers-count{
+            font-weight: bold;
+        }
+
+        hr {
+            display: flex; 
+            justify-content: center;
+            align-items: center; 
+            border-style: solid;
+            border-width: 1.15px;
+            border-color: rgb(185, 185, 185);
+        
+        }
+
+        /* BUTTONS */
+
+        .button-functions-container{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2px;
+        }
+
+        .interactive-buttons{
+            position: relative;
+            margin: 4px;
+            font-size: 11px;
+            color: rgb(255, 255, 255);
+            background-color: rgb(0, 0, 0);
+            border-style: none;
+            padding: 10px;
+            border-radius: 10px;
+            transition: transform 0.15s ease-in-out;
+            cursor: pointer;
+            box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset,
+                        rgba(0, 0, 0, 0.2) 0px -50px 36px -28px inset;
+        }
+
+        .interactive-buttons:hover{
+            transform: scale(1.1);
+        }
+
+        /* DARK MODE */
+
+        body.dark-mode {
+            background: #000000; /* Dark background color */
+        }
+
+        .dark-mode .text-header i{
+            color: white;
+        }
+
+        .dark-mode .text-header i:hover{
+            background-color: rgb(31, 31, 31);
+        }
+
+        .dark-mode .nav-bar:hover{
+            background-color: rgb(28, 28, 28);
+        }
+        .dark-mode .header,
+        .dark-mode #section {
+            background-color: #000000; 
+            color: #fff; 
+            box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.2); 
+        }
+
+        .dark-mode .interactive-buttons,
+        .dark-mode .follow-button{
+            background-color: white;
+            color: black;
+        }
+
+        .dark-mode .follow-button:hover{
+            background-color: rgb(211, 211, 211);
+        }
+
+        .dark-mode .calculator button,
+        .dark-mode .calculator{
+            background-color: rgb(6, 6, 6);
+            color: white;
+        }
+
+        .dark-mode .calculator button:hover{
+            background-color: rgb(43, 43, 43);
+        }
+
+        .dark-mode .calculator{
+            box-shadow: rgba(149, 149, 149, 0.35) 0px -50px 36px -28px inset, rgba(255, 255, 255, 0.19) 0px 10px 20px, rgba(213, 213, 213, 0.23) 0px 6px 6px;
+        }
+
+        .dark-mode #display{
+            background-color: rgb(20, 20, 20);
+            color: white;
+        }
+
+        .dark-mode .calculator .operator-button{
+            background-color: rgb(255, 179, 0);
+        }
+
+        .dark-mode .calculator .operator-button:hover{
+            background-color: rgb(214, 151, 2);
+        }
+
+        .dark-mode  .calculator .operator-button:active{
+            background-color: rgb(202, 142, 0);
+        }
+
+        /* COLOR BUTTONS */
+
+        .color-button {
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            border: 2px solid #fff;
+            margin: 0 10.5px 10px;
+            border-radius: 100px;
+            border: dashed 2px rgb(212, 212, 212);
+            animation: rotate 4s linear infinite;
+        }
+
+        .color-button:hover{
+            animation: none; 
+            transform: scale(1.1);
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        #red { background-color: rgb(211, 46, 46); }
+        #orange { background-color: orange; }
+        #yellow { background-color: rgb(255, 252, 56);}
+        #green { background-color: rgb(70, 249, 50); }
+        #blue { background-color: rgb(49, 149, 255); }
+        #violet { background-color: rgb(142, 62, 254); }
+        #white{ background-color: rgb(241, 241, 241); }
+        #black{ background-color: rgb(0, 0, 0); }
+        /* NAVBAR ??? */
+        .nav-bar h1{
+            font-size: 20px;
+            margin-left: 20px;
+            padding: 10px;
+        }
+
+        .nav-bar:hover{
+            background-color: rgb(226, 226, 226);
+            text-decoration: underline rgb(31, 163, 215);
+            text-underline-offset: 3px;
+        }
+        /* POST CONTAINERS */
+
+        .post-container {
+            padding: 10px;
+            margin: 10px;
+            
+        }
+
+        .post-container h1{
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+
+        .post-container p{
+            font-size: 13px;
+        }
+
+        .username{
+            font-weight: normal;
+            color: grey;
+        }
+        .image-post{
+            width: 350px;
+            border-radius: 20px;
+            margin-top: 10px;
+        }
+        .comment-retweet-like i{
+            font-size: 13px;
+            margin-top: 10px;
+            margin-right: 100px;
+            color: grey;
+            font-weight: normal;
+            cursor: pointer;
+        }
+
+        #likes,
+        #retweet {
+            padding: 5px;
+        }
+        #commentButton:hover{ color:rgb(31, 163, 215); }
+        #likeButton:hover{ color: red; }
+        #retweetButton:hover{ color: rgb(51, 212, 75); }
+
+        /* CALCULATOR */
+
+        .hidden {
+            display: none;
+        }
+        .calculator{
+            margin: 30px auto;
+            background-color: rgb(255, 255, 255);
+            border-radius: 15px;
+            width: 350px;
+            overflow: hidden;
+            border: solid rgb(197, 197, 197);
+            transition: background-color 0.15s ease-in-out;
+            box-shadow: rgba(149, 149, 149, 0.35) 0px -50px 36px -28px inset, rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;;
+        }
+
+        #display{
+            width: 100%;
+            height: 90px;
+            padding: 20px;
+            font-size: 3rem;
+            text-align: left;
+            border: none;
+            color: rgb(0, 0, 0);
+            background-color: rgb(226, 226, 226);
+            box-shadow: rgba(94, 94, 94, 0.35) 0px -50px 36px -28px inset;
+        }
+        #keys{
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            padding: 20px;
+        }
+
+        .calculator button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 2rem;
+            font-weight: bold;
+            background-color: rgb(226, 226, 226);
+            border-style: none;
+            box-shadow: rgba(181, 181, 181, 0.25) 0px 30px 60px -12px inset, rgba(167, 167, 167, 0.3) 0px 18px 36px -18px inset;
+            transition: color 0.15s ease-in-out;
+        }
+
+        .calculator button:hover {
+            background-color: rgb(208, 208, 208);
+        }
+
+        .calculator button:active {
+            background-color: rgb(181, 181, 181);
+        }
+
+        .calculator .operator-button{
+            background-color: rgb(255, 193, 50);
+        }
+
+        .calculator .operator-button:hover{
+            background-color: rgb(237, 172, 21);
+        }
+
+        .calculator .operator-button:active{
+            background-color: rgb(222, 157, 6);
+        }
+
+</style>
+<body>
+    
+   <main>
+        <div id="section">
+            <div class="header">
+                <div class="text-header">
+                    <a href="#section"><i class="fa-solid fa-arrow-left"></i></a>
+                    <h1>Florence Azriel R. Migallos</h1> 
+                    <h2>Interactive Buttons</h2>
+                </div>
+            </div>
+            
+            <div class="banner">
+                <img src="https://i.ibb.co/NTS899K/luffy.jpg" alt="banner" onclick="openModalBanner()">
+            </div>
+
+            <div class="container-bio">
+                <div class="profile-image">
+                    <img src="https://i.ibb.co/M5gy79c/vegapunk.jpg" alt="profile picture" onclick="openModalProfile()">
+                </div>
+
+                <div id="myModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close" onclick="closeModal()">&times;</span>
+                        <img id="modalImage" src="" alt="enlarged image">
+                    </div>
+                </div>
+                <div id="myModal-banner" class="modal">
+                    <div class="modal-content-banner">
+                        <span class="close" onclick="closeModal()">&times;</span>
+                        <img id="modalImage-banner" src="" alt="enlarged image">
+                    </div>
+                </div>
+
+                <button class="follow-button" id="incrementButton"> Follow </button>
+
+                <div class="name-bio">
+                    <h1>Florence Azriel R. Migallos</h1>
+                    <h3>@renzymigz</h3>
+                    <p>One Piece is the greatest piece of fiction <span class="name-hashtag">#OnePiece #Gear5</span></p>
+
+                    <h3><i class="fa-regular fa-calendar"></i> Created April 7, 2024</h3>
+                    <p class="following-followers-count">
+                        69 <span id="following-followers">Following</span>   &nbsp;&nbsp;&nbsp;&nbsp;
+                        <span id="counter">10</span> <span id="following-followers">Followers</span>
+                    </p>
+                </div>
+            </div>
+            
+            <hr>
+            
+            <div class="button-functions-container">
+                <button class="interactive-buttons" id="toggle-dark-mode-btn"><i class="fa-solid fa-moon"></i> Toggle Dark Mode </button>
+                <button class="interactive-buttons" onclick="togglePostVisibility()"><i class="fa-solid fa-eye"></i> Toggle Post Visibility </button>
+                <button class="interactive-buttons" onclick="imageVisibility()" ><i class="fa-solid fa-eye"></i> Toggle Image Post Visibility </button>
+                <button class="interactive-buttons" onclick="textVisibility()" ><i class="fa-solid fa-eye"></i> Toggle Text Post Visibility </button>
+            </div>
+
+            <div class="button-functions-container">
+                <button class="interactive-buttons" onclick="toggleCalculator()"><i class="fa-solid fa-calculator"></i> Toggle Calculator Mode </button>
+                <button class="interactive-buttons" onclick="increaseCalculatorSize()"><i class="fa-solid fa-calculator"></i> Increase Calculator Size </button>
+                <button class="interactive-buttons" onclick="decreaseCalculatorSize()"><i class="fa-solid fa-calculator"></i> Decrease Calculator Size </button>
+            </div>
+
+            <div class="button-functions-container">
+                <button class="interactive-buttons" onclick="increaseFontSize()"><i class="fa-solid fa-text-size"></i> Increase Post Font Size </button>
+                <button class="interactive-buttons" onclick="decreaseFontSize()"><i class="fa-solid fa-text-size"></i> Decrease Post Font Size </button>
+                <button class="interactive-buttons"  onclick="refreshPage()"><i class="fa-solid fa-rotate-reverse" ></i> Reset Style </button>
+            </div>
+
+            <div class="button-functions-container">
+                <span class="color-button" id="red"></span>
+                <span class="color-button" id="orange"></span>
+                <span class="color-button" id="yellow"></span>
+                <span class="color-button" id="green"></span>
+                <span class="color-button" id="blue"></span>
+                <span class="color-button" id="violet"></span>
+                <span class="color-button" id="white"></span>
+                <span class="color-button" id="black"></span>
+            </div>
+
+            <hr>
+
+            <div class="nav-bar">
+                <h1>Posts</h1>
+            </div>
+
+            <hr>
+            
+            <div class="post-container" id="post-container">
+                <h1>Florence Azriel R. Migallos <span class="username">@renzymigz</span> </h1>
+                <p id="textVisibility">One Piece is the clear winner among the Big 3 Shonen manga, thanks to its extensive length, emotional moments, surprising twists, and well-developed side characters. With over 1000 chapters, One Piece's massive length allows for an intricately interconnected story that fans can deeply invest in and love.</p>
+                <img src="https://i.ibb.co/nwTYZwr/GKj-UV5-DWUAADXD.jpg" alt="luffy-gear5" class="image-post" id="imageVisibility">
+                <div class="comment-retweet-like">
+                    <i class="fa-regular fa-comment" id="commentButton"></i>
+                    <i class="fa-solid fa-retweet" id="retweetButton"><span id="retweet">3</span></i>
+                    <i class="fa-regular fa-heart" id="likeButton"><span id="likes">2</span></i>
+                </div> 
+            </div>
+
+            <hr>
+
+            <div class="nav-bar">
+                <h1>Calculator</h1>
+            </div>
+
+            <hr>
+
+            <div class="calculator" id="calculator">
+                <input id="display" readonly>
+                <div id="keys">
+                    <button onclick="appendToDisplay('+')" class="operator-button">+</button>
+                    <button onclick="appendToDisplay('7')">7</button>
+                    <button onclick="appendToDisplay('8')">8</button>
+                    <button onclick="appendToDisplay('9')">9</button>
+                    <button onclick="appendToDisplay('-')" class="operator-button">-</button>
+                    <button onclick="appendToDisplay('4')">4</button>
+                    <button onclick="appendToDisplay('5')">5</button>
+                    <button onclick="appendToDisplay('6')">6</button>
+                    <button onclick="appendToDisplay('*')" class="operator-button">*</button>
+                    <button onclick="appendToDisplay('1')">1</button>
+                    <button onclick="appendToDisplay('2')">2</button>
+                    <button onclick="appendToDisplay('3')">3</button>
+                    <button onclick="appendToDisplay('/')" class="operator-button">/</button>
+                    <button onclick="appendToDisplay('0')">0</button>
+                    <button onclick="appendToDisplay('.')">.</button>
+                    <button onclick="calculate()">=</button>
+                    <button onclick="clearDisplay()"class="operator-button">C</button>
+                </div>
+            </div>
+
+            <hr>    
+        </div>
+   </main>
+
+   <script>
+        var incrementButton = document.getElementById("incrementButton");
+        var likeButton = document.getElementById("likeButton");
+        var retweetButton = document.getElementById("retweetButton");
+
+        var counter = document.getElementById("counter");
+        var likes = document.getElementById("likes");
+        var retweets = document.getElementById("retweet");
+
+        var count = 10;
+        var likescounter = 2;
+        var retweetscounter = 3;
+
+        
+        
+        incrementButton.addEventListener("click", function() {
+            count++;
+            counter.textContent = count;
+        });
+
+        likeButton.addEventListener("click", function() {
+            var currentLikes = parseInt(likes.textContent);
+            likes.textContent = currentLikes + 1;
+        });
+
+        retweetButton.addEventListener("click", function() {
+            var currentRetweets = parseInt(retweets.textContent);
+            retweets.textContent = currentRetweets + 1;
+        });
+        
+        function openModalProfile() {
+            var modal = document.getElementById("myModal");
+            var modalImg = document.getElementById("modalImage");
+            var img = document.querySelector(".profile-image img");
+            modal.style.display = "block";
+            modalImg.src = img.src;
+        }
+
+        function openModalBanner() {
+            var modal = document.getElementById("myModal-banner");
+            var modalImg = document.getElementById("modalImage-banner");
+            var img = document.querySelector(".banner img");
+            modal.style.display = "block";
+            modalImg.src = img.src;
+        }
+
+        function closeModal() {
+            var modal = document.getElementById("myModal");
+            var modal2 = document.getElementById("myModal-banner");
+            modal.style.display = "none";
+            modal2.style.display = "none";
+        }
+
+        // DARK MODE 
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+
+        document.getElementById('toggle-dark-mode-btn').addEventListener('click', toggleDarkMode);
+
+        // COLOR BUTTONS
+        var buttons = document.querySelectorAll('.color-button');
+        var body = document.body;
+
+        buttons.forEach(function (button){
+            console.log(buttons);
+            button.addEventListener('click', function(e){
+                console.log(e);
+                console.log(e.target);
+                if(e.target.id === 'red'){
+                    body.style.backgroundColor = 'rgb(211, 46, 46)';
+                }
+                if(e.target.id === 'orange'){
+                    body.style.backgroundColor = e.target.id;
+                }
+                if(e.target.id === 'yellow'){
+                    body.style.backgroundColor = 'rgb(255, 252, 56)';
+                }
+                if(e.target.id === 'green'){
+                    body.style.backgroundColor = 'rgb(70, 249, 50)';   
+                }
+                if(e.target.id === 'blue'){
+                    body.style.backgroundColor = 'rgb(49, 149, 255)';   
+                }
+                if(e.target.id === 'violet'){
+                    body.style.backgroundColor = 'rgb(142, 62, 254)';   
+                }
+                if(e.target.id === 'white'){
+                    body.style.backgroundColor = 'rgb(253, 253, 253)';   
+                }
+                if(e.target.id === 'black'){
+                    body.style.backgroundColor = 'rgb(0, 0, 0)';   
+                }
+            });
+        });
+        // POSTT
+
+        function togglePostVisibility() {
+            var post = document.getElementById('post-container');
+            post.classList.toggle('hidden');
+        }
+
+        function textVisibility() {
+            var text = document.getElementById('textVisibility');
+            text.classList.toggle('hidden');
+        }
+
+        function imageVisibility() {
+            var image = document.getElementById('imageVisibility');
+            image.classList.toggle('hidden');
+        }
+
+        function increaseFontSize() {
+            var text = document.getElementById('textVisibility');
+            var currentSize = parseFloat(window.getComputedStyle(text).fontSize);
+            var newSize = currentSize * 1.1; 
+            text.style.fontSize = newSize + 'px';
+        }      
+
+        function decreaseFontSize() {
+            var text = document.getElementById('textVisibility');
+            var currentSize = parseFloat(window.getComputedStyle(text).fontSize);
+            var newSize = currentSize * 0.9; 
+            text.style.fontSize = newSize + 'px';
+        }
+        // CALCULATOR
+
+        const display = document.getElementById("display");
+
+        function appendToDisplay(input){
+            display.value += input;
+        }
+
+        function clearDisplay(){
+            display.value = "";
+        }
+        
+        function calculate(){
+            try{
+                display.value = eval(display.value);
+            }
+            catch(error){
+                display.value = "ERROR";
+            }
+        }
+
+        // CALCULATOR SIZE
+
+        function toggleCalculator() {
+            var calculator = document.getElementById('calculator');
+            calculator.classList.toggle('hidden');
+        }
+
+        function increaseCalculatorSize() {
+            var calculator = document.getElementById('calculator');
+            calculator.style.width = calculator.offsetWidth * 1.1 + 'px';
+            calculator.style.height = calculator.offsetHeight * 1.1 + 'px';
+        }
+
+        function decreaseCalculatorSize() {
+            var calculator = document.getElementById('calculator');
+            calculator.style.width = calculator.offsetWidth * 0.9 + 'px';
+            calculator.style.height = calculator.offsetHeight * 0.9 + 'px';
+        }
+
+        function refreshPage() { // REFRESH PAGE
+         
+            location.reload();
+        }
+
+        window.onload = function() { // TOP
+            window.scrollTo(0, 0);
+        };
+   </script>
+
+</body>
+
+</html>
