@@ -9,470 +9,638 @@
 
 <style>
     @import url('https://fonts.cdnfonts.com/css/helvetica-neue-5');
-        *{
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family:'Helvetica Neue', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            scroll-behavior: smooth;
-        }
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:'Helvetica Neue', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    scroll-behavior: smooth;
+}
 
-        body {
-            overflow-x: hidden;
-            transition: background-color 0.5s;
-            animation: popupcontainer 0.1s ease;
-        }
-
-        @keyframes popupcontainer {
-            0% { transform: scale(0)}
-            50% { transform: scale(1.1)  }
-            100% { transform: scale(1) }
-        }
+body {
+    overflow-x: hidden;
+    transition: background-color 0.5s;
+    animation: popupcontainer 0.1s ease;
+}
 
 
-        #section {
-            height: 100%;
-            width: 630px;
-            display: block;
-            margin: 0 auto;
-            background-color: rgb(255, 255, 255);
-            box-shadow: 0px 0px 20px;
-            border-radius: 10px;
-            transition: background-color 0.15s ease-in-out;
-        }
+/* --------- LOGIN CONTAINER ----------- */
+.overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 
+    z-index: 99999;
+    
+}
 
-        .header {
-            background-color: rgb(242, 242, 242);
-            backdrop-filter: blur(10px);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            transition: background-color 0.15s ease-in-out;
-        }
+.login-container {
+    z-index: 99999999;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 450px;
+    height: 480px;
+    background-color: rgb(255, 255, 255); 
+    border-radius: 10px;
+    padding: 30px 30px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset,
+    rgba(0, 0, 0, 0.2) 0px -50px 36px -28px inset;
+}
 
-        .text-header{
-            margin-left: 40px;
-            text-align: left;
-            position: relative;
-            font-size: 8px;
-            padding: 5px;
-        }
+input:focus{
+    box-shadow: rgba(70, 70, 70, 0.4) 0px 2px 4px, rgba(97, 97, 97, 0.3) 0px 7px 13px -3px, rgba(134, 134, 134, 0.2) 0px -3px 0px inset, rgba(150, 150, 150, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    transform: scale(1.01);
+}
 
-        .text-header i{
-            position: absolute;
-            font-size: 15px;
-            transform: translate(-40px, 0px);
-            color: rgb(0, 0, 0);
-            padding: 8px;
-            transition: background-color, 0.15s ease-in-out;
-        }
+input{
+    transition: transform 0.1s ease-in-out;
+}
 
-        .text-header i:hover{
-            background-color: rgb(200, 200, 200);
-            border-radius: 1000px;
-        }
+.login-container h3{
+    text-align: center;
+    color: rgb(0, 0, 0);
+}
 
-        .text-header h2{
+.login-container h3 i{
+    font-size: 40px;
+}
+
+.login-container hr{
+    border-top: 1px solid rgb(0, 0, 0); 
+    margin: 10px 0px 20px; 
+    
+}
+
+.login-container .input-container{
+    position: relative;
+    display: flex;
+    margin: 20px auto;
+    justify-content: center;
+    width: 80%;
+    height: 50px;
+}
+
+.input-container input{
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 1px solid rgb(0, 0, 0);
+    font-size: 15px;
+    border-radius: 10px;
+    padding: 25px 45px 25px 20px;
+}
+
+.input-container input::placeholder{
+    color: rgb(64, 64, 64);
+}
+
+.input-container i{
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgb(0, 0, 0);
+    font-size: 18px;
+}
+
+.remember-box{
+    text-align: center;
+    margin: -10px 0 20px;
+    accent-color: rgb(0, 0, 0);
+    padding-top: 10px;
+    
+}
+
+.remember-box i{
+    color: grey;
+}
+
+.submit-button{
+    display: flex;
+    margin: 20px auto;
+    justify-content: center;
+    width: 80%;
+    padding: 15px;
+    background-color: rgb(0, 0, 0);
+    color: white;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 17px;
+    font-weight:600;
+    transition: background-color 0.1s ease;
+}
+
+.submit-button:hover{
+    background-color: rgb(34, 34, 34);
+    transition: background-color 0.1s ease;
+}
+
+.forgot{
+    text-align: center;
+    margin-top: 20px;
+}
+
+.forgot a{
+    text-decoration: none;
+    color: rgb(31, 163, 215);
+}
+
+.forgot a:hover{
+    color: rgb(15, 121, 163);
+}
+
+/* MAIN AREA */
+
+#section {
+    height: 100%;
+    width: 630px;
+    display: block;
+    margin: 0 auto;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 0px 20px;
+    border-radius: 10px;
+    transition: background-color 0.15s ease-in-out;
+}
+
+.header {
+    background-color: rgb(242, 242, 242);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: background-color 0.15s ease-in-out;
+}
+
+.text-header{
+    margin-left: 40px;
+    text-align: left;
+    position: relative;
+    font-size: 8px;
+    padding: 5px;
+}
+
+.text-header i{
+    position: absolute;
+    font-size: 15px;
+    transform: translate(-40px, 0px);
+    color: rgb(0, 0, 0);
+    padding: 8px;
+    transition: background-color, 0.15s ease-in-out;
+}
+
+.text-header i:hover{
+    background-color: rgb(200, 200, 200);
+    border-radius: 1000px;
+}
+
+.text-header h2{
+    color: grey;
+    font-weight: normal;
+}
+
+.banner{
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+}
+
+.follow-button{
+    position: absolute;
+    transform: translate(530px, -42px);
+    font-size: 15px;
+    color: white;
+    background-color: black;
+    padding: 10px 18px 10px 18px;
+    border-radius: 40px;
+    font-weight: bold;
+    border-style: none;
+    transition: background-color 0.15s ease-in-out;
+    cursor: pointer;
+}
+
+.follow-button:hover{
+    background-color: rgb(54, 54, 54);
+}
+
+/* proifle image */
+
+.profile-image {
+    position: absolute;
+    transform: translate(15px, -130px);
+    border: 4px solid white;
+    border-radius: 1000px;
+}
+
+.profile-image img {
+    width: 130px;
+    height: 130px;
+    border-radius: 100px;
+    transition: filter 0.15s ease-in-out;
+    cursor: pointer;
+}
+
+.profile-image img:hover {
+    filter: brightness(0.7);
+}
+
+.model-banner,
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 800px;
+}
+
+.modal-content img {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    border-radius: 1000px;
+}
+
+.modal-content-banner img {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    width: 1400px;
+}
+
+.close {
+    color: #ccc;
+    float: right;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.15s ease-in-out;
+}
+
+.close:hover,
+.close:focus {
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* name */
+
+.name-bio{
+    position: relative;
+    margin-top: 50px;
+    padding: 15px;
+    font-size: 10px;
+}
+
+.name-bio h3{
+    color: grey;
+    font-weight: normal;
+    font-size: 13px;
+}
+
+.name-bio p{
+    font-size: 13px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+}
+
+.name-hashtag {
+    color: rgb(31, 163, 215);
+}
+
+.name-bio h2{
+    padding-top: 10px;
+    font-size: 13px;
+}
+
+
+#following-followers{
+    font-weight: normal;
+    color: rgb(150, 150, 150);
+}
+
+.following-followers-count{
+    font-weight: bold;
+}
+
+hr {
+    display: flex; 
+    justify-content: center;
+    align-items: center; 
+    border-style: solid;
+    border-width: 1.15px;
+    border-color: rgb(185, 185, 185);
+   
+}
+
+/* BUTTONS */
+
+.button-functions-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
+}
+
+.interactive-buttons{
+    position: relative;
+    margin: 4px;
+    font-size: 11px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 0, 0);
+    border-style: none;
+    padding: 10px;
+    border-radius: 10px;
+    transition: transform 0.15s ease-in-out;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset,
+                rgba(0, 0, 0, 0.2) 0px -50px 36px -28px inset;
+}
+
+.interactive-buttons:hover{
+    transform: scale(1.1);
+}
+
+/* DARK MODE */
+
+body.dark-mode {
+    background: #000000; /* Dark background color */
+}
+
+.dark-mode .text-header i{
+    color: white;
+}
+
+.dark-mode .text-header i:hover{
+    background-color: rgb(31, 31, 31);
+}
+
+.dark-mode .nav-bar:hover{
+    background-color: rgb(28, 28, 28);
+}
+.dark-mode .header,
+.dark-mode #section {
+    background-color: #000000; 
+    color: #fff; 
+    box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.2); 
+}
+
+.dark-mode .interactive-buttons,
+.dark-mode .follow-button{
+    background-color: white;
+    color: black;
+}
+
+.dark-mode .follow-button:hover{
+    background-color: rgb(211, 211, 211);
+}
+
+.dark-mode .calculator button,
+.dark-mode .calculator{
+    background-color: rgb(6, 6, 6);
+    color: white;
+}
+
+.dark-mode .calculator button:hover{
+    background-color: rgb(43, 43, 43);
+}
+
+.dark-mode .calculator{
+    box-shadow: rgba(149, 149, 149, 0.35) 0px -50px 36px -28px inset, rgba(255, 255, 255, 0.19) 0px 10px 20px, rgba(213, 213, 213, 0.23) 0px 6px 6px;
+}
+
+.dark-mode #display{
+    background-color: rgb(20, 20, 20);
+    color: white;
+}
+
+.dark-mode .calculator .operator-button{
+    background-color: rgb(255, 179, 0);
+}
+
+.dark-mode .calculator .operator-button:hover{
+    background-color: rgb(214, 151, 2);
+}
+
+.dark-mode  .calculator .operator-button:active{
+    background-color: rgb(202, 142, 0);
+}
+
+/* COLOR BUTTONS */
+
+.color-button {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    border: 2px solid #fff;
+    margin: 0 10.5px 10px;
+    border-radius: 100px;
+    border: dashed 2px rgb(212, 212, 212);
+    animation: rotate 4s linear infinite;
+}
+
+.color-button:hover{
+    animation: none; 
+    transform: scale(1.1);
+}
+
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#red { background-color: rgb(211, 46, 46); }
+#orange { background-color: orange; }
+#yellow { background-color: rgb(255, 252, 56);}
+#green { background-color: rgb(70, 249, 50); }
+#blue { background-color: rgb(49, 149, 255); }
+#violet { background-color: rgb(142, 62, 254); }
+#white{ background-color: rgb(241, 241, 241); }
+#black{ background-color: rgb(0, 0, 0); }
+/* NAVBAR ??? */
+.nav-bar h1{
+    font-size: 20px;
+    margin-left: 20px;
+    padding: 10px;
+}
+
+.nav-bar:hover{
+    background-color: rgb(226, 226, 226);
+    text-decoration: underline rgb(31, 163, 215);
+    text-underline-offset: 3px;
+}
+/* POST CONTAINERS */
+
+.post-container {
+    padding: 10px;
+    margin: 10px;
+    
+}
+
+.post-container h1{
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+.post-container p{
+    font-size: 13px;
+}
+
+.email{
+    font-weight: normal;
+    color: grey;
+}
+
+.username{
+            font-weight: normal;
             color: grey;
-            font-weight: normal;
         }
 
-        .banner{
-            overflow: hidden;
-            position: relative;
-            cursor: pointer;
-        }
+.image-post{
+    width: 350px;
+    border-radius: 20px;
+    margin-top: 10px;
+}
+.comment-retweet-like i{
+    font-size: 13px;
+    margin-top: 10px;
+    margin-right: 100px;
+    color: grey;
+    font-weight: normal;
+    cursor: pointer;
+}
 
-        .follow-button{
-            position: absolute;
-            transform: translate(530px, -42px);
-            font-size: 15px;
-            color: white;
-            background-color: black;
-            padding: 10px 18px 10px 18px;
-            border-radius: 40px;
-            font-weight: bold;
-            border-style: none;
-            transition: background-color 0.15s ease-in-out;
-            cursor: pointer;
-        }
+#likes,
+#retweet {
+    padding: 5px;
+}
+#commentButton:hover{ color:rgb(31, 163, 215); }
+#likeButton:hover{ color: red; }
+#retweetButton:hover{ color: rgb(51, 212, 75); }
 
-        .follow-button:hover{
-            background-color: rgb(54, 54, 54);
-        }
+/* CALCULATOR */
 
-        /* proifle image */
+.hidden {
+    display: none;
+}
+.calculator{
+    margin: 30px auto;
+    background-color: rgb(255, 255, 255);
+    border-radius: 15px;
+    width: 350px;
+    overflow: hidden;
+    border: solid rgb(197, 197, 197);
+    transition: background-color 0.15s ease-in-out;
+    box-shadow: rgba(149, 149, 149, 0.35) 0px -50px 36px -28px inset, rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;;
+}
 
-        .profile-image {
-            position: absolute;
-            transform: translate(15px, -130px);
-            border: 4px solid white;
-            border-radius: 1000px;
-        }
+#display{
+    width: 100%;
+    height: 90px;
+    padding: 20px;
+    font-size: 3rem;
+    text-align: left;
+    border: none;
+    color: rgb(0, 0, 0);
+    background-color: rgb(226, 226, 226);
+    box-shadow: rgba(94, 94, 94, 0.35) 0px -50px 36px -28px inset;
+}
+#keys{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    padding: 20px;
+}
 
-        .profile-image img {
-            width: 130px;
-            height: 130px;
-            border-radius: 100px;
-            transition: filter 0.15s ease-in-out;
-            cursor: pointer;
-        }
+.calculator button {
+    width: 60px;
+    height: 60px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 2rem;
+    font-weight: bold;
+    background-color: rgb(226, 226, 226);
+    border-style: none;
+    box-shadow: rgba(181, 181, 181, 0.25) 0px 30px 60px -12px inset, rgba(167, 167, 167, 0.3) 0px 18px 36px -18px inset;
+    transition: color 0.15s ease-in-out;
+}
 
-        .profile-image img:hover {
-            filter: brightness(0.7);
-        }
+.calculator button:hover {
+    background-color: rgb(208, 208, 208);
+}
 
-        .model-banner,
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1001;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-        }
+.calculator button:active {
+    background-color: rgb(181, 181, 181);
+}
 
-        .modal-content {
-            margin: auto;
-            display: block;
-            width: 80%;
-            max-width: 800px;
-        }
+.calculator .operator-button{
+    background-color: rgb(255, 193, 50);
+}
 
-        .modal-content img {
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            position: absolute;
-            border-radius: 1000px;
-        }
+.calculator .operator-button:hover{
+    background-color: rgb(237, 172, 21);
+}
 
-        .modal-content-banner img {
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            position: absolute;
-            width: 1400px;
-        }
-
-        .close {
-            color: #ccc;
-            float: right;
-            font-size: 30px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: color 0.15s ease-in-out;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: #fff;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        /* name */
-
-        .name-bio{
-            position: relative;
-            margin-top: 50px;
-            padding: 15px;
-            font-size: 10px;
-        }
-
-        .name-bio h3{
-            color: grey;
-            font-weight: normal;
-            font-size: 13px;
-        }
-
-        .name-bio p{
-            font-size: 13px;
-            padding-top: 14px;
-            padding-bottom: 14px;
-        }
-
-        .name-hashtag {
-            color: rgb(31, 163, 215);
-        }
-
-        .name-bio h2{
-            padding-top: 10px;
-            font-size: 13px;
-        }
-
-
-        #following-followers{
-            font-weight: normal;
-            color: rgb(150, 150, 150);
-        }
-
-        .following-followers-count{
-            font-weight: bold;
-        }
-
-        hr {
-            display: flex; 
-            justify-content: center;
-            align-items: center; 
-            border-style: solid;
-            border-width: 1.15px;
-            border-color: rgb(185, 185, 185);
-        
-        }
-
-        /* BUTTONS */
-
-        .button-functions-container{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2px;
-        }
-
-        .interactive-buttons{
-            position: relative;
-            margin: 4px;
-            font-size: 11px;
-            color: rgb(255, 255, 255);
-            background-color: rgb(0, 0, 0);
-            border-style: none;
-            padding: 10px;
-            border-radius: 10px;
-            transition: transform 0.15s ease-in-out;
-            cursor: pointer;
-            box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset,
-                        rgba(0, 0, 0, 0.2) 0px -50px 36px -28px inset;
-        }
-
-        .interactive-buttons:hover{
-            transform: scale(1.1);
-        }
-
-        /* DARK MODE */
-
-        body.dark-mode {
-            background: #000000; /* Dark background color */
-        }
-
-        .dark-mode .text-header i{
-            color: white;
-        }
-
-        .dark-mode .text-header i:hover{
-            background-color: rgb(31, 31, 31);
-        }
-
-        .dark-mode .nav-bar:hover{
-            background-color: rgb(28, 28, 28);
-        }
-        .dark-mode .header,
-        .dark-mode #section {
-            background-color: #000000; 
-            color: #fff; 
-            box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.2); 
-        }
-
-        .dark-mode .interactive-buttons,
-        .dark-mode .follow-button{
-            background-color: white;
-            color: black;
-        }
-
-        .dark-mode .follow-button:hover{
-            background-color: rgb(211, 211, 211);
-        }
-
-        .dark-mode .calculator button,
-        .dark-mode .calculator{
-            background-color: rgb(6, 6, 6);
-            color: white;
-        }
-
-        .dark-mode .calculator button:hover{
-            background-color: rgb(43, 43, 43);
-        }
-
-        .dark-mode .calculator{
-            box-shadow: rgba(149, 149, 149, 0.35) 0px -50px 36px -28px inset, rgba(255, 255, 255, 0.19) 0px 10px 20px, rgba(213, 213, 213, 0.23) 0px 6px 6px;
-        }
-
-        .dark-mode #display{
-            background-color: rgb(20, 20, 20);
-            color: white;
-        }
-
-        .dark-mode .calculator .operator-button{
-            background-color: rgb(255, 179, 0);
-        }
-
-        .dark-mode .calculator .operator-button:hover{
-            background-color: rgb(214, 151, 2);
-        }
-
-        .dark-mode  .calculator .operator-button:active{
-            background-color: rgb(202, 142, 0);
-        }
-
-        /* COLOR BUTTONS */
-
-        .color-button {
-            width: 40px;
-            height: 40px;
-            cursor: pointer;
-            border: 2px solid #fff;
-            margin: 0 10.5px 10px;
-            border-radius: 100px;
-            border: dashed 2px rgb(212, 212, 212);
-            animation: rotate 4s linear infinite;
-        }
-
-        .color-button:hover{
-            animation: none; 
-            transform: scale(1.1);
-        }
-
-        @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        #red { background-color: rgb(211, 46, 46); }
-        #orange { background-color: orange; }
-        #yellow { background-color: rgb(255, 252, 56);}
-        #green { background-color: rgb(70, 249, 50); }
-        #blue { background-color: rgb(49, 149, 255); }
-        #violet { background-color: rgb(142, 62, 254); }
-        #white{ background-color: rgb(241, 241, 241); }
-        #black{ background-color: rgb(0, 0, 0); }
-        /* NAVBAR ??? */
-        .nav-bar h1{
-            font-size: 20px;
-            margin-left: 20px;
-            padding: 10px;
-        }
-
-        .nav-bar:hover{
-            background-color: rgb(226, 226, 226);
-            text-decoration: underline rgb(31, 163, 215);
-            text-underline-offset: 3px;
-        }
-        /* POST CONTAINERS */
-
-        .post-container {
-            padding: 10px;
-            margin: 10px;
-            
-        }
-
-        .post-container h1{
-            font-size: 15px;
-            margin-bottom: 10px;
-        }
-
-        .post-container p{
-            font-size: 13px;
-        }
-
-        .username{
-            font-weight: normal;
-            color: grey;
-        }
-        .image-post{
-            width: 350px;
-            border-radius: 20px;
-            margin-top: 10px;
-        }
-        .comment-retweet-like i{
-            font-size: 13px;
-            margin-top: 10px;
-            margin-right: 100px;
-            color: grey;
-            font-weight: normal;
-            cursor: pointer;
-        }
-
-        #likes,
-        #retweet {
-            padding: 5px;
-        }
-        #commentButton:hover{ color:rgb(31, 163, 215); }
-        #likeButton:hover{ color: red; }
-        #retweetButton:hover{ color: rgb(51, 212, 75); }
-
-        /* CALCULATOR */
-
-        .hidden {
-            display: none;
-        }
-        .calculator{
-            margin: 30px auto;
-            background-color: rgb(255, 255, 255);
-            border-radius: 15px;
-            width: 350px;
-            overflow: hidden;
-            border: solid rgb(197, 197, 197);
-            transition: background-color 0.15s ease-in-out;
-            box-shadow: rgba(149, 149, 149, 0.35) 0px -50px 36px -28px inset, rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;;
-        }
-
-        #display{
-            width: 100%;
-            height: 90px;
-            padding: 20px;
-            font-size: 3rem;
-            text-align: left;
-            border: none;
-            color: rgb(0, 0, 0);
-            background-color: rgb(226, 226, 226);
-            box-shadow: rgba(94, 94, 94, 0.35) 0px -50px 36px -28px inset;
-        }
-        #keys{
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            padding: 20px;
-        }
-
-        .calculator button {
-            width: 60px;
-            height: 60px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-size: 2rem;
-            font-weight: bold;
-            background-color: rgb(226, 226, 226);
-            border-style: none;
-            box-shadow: rgba(181, 181, 181, 0.25) 0px 30px 60px -12px inset, rgba(167, 167, 167, 0.3) 0px 18px 36px -18px inset;
-            transition: color 0.15s ease-in-out;
-        }
-
-        .calculator button:hover {
-            background-color: rgb(208, 208, 208);
-        }
-
-        .calculator button:active {
-            background-color: rgb(181, 181, 181);
-        }
-
-        .calculator .operator-button{
-            background-color: rgb(255, 193, 50);
-        }
-
-        .calculator .operator-button:hover{
-            background-color: rgb(237, 172, 21);
-        }
-
-        .calculator .operator-button:active{
-            background-color: rgb(222, 157, 6);
-        }
+.calculator .operator-button:active{
+    background-color: rgb(222, 157, 6);
+}
 
 </style>
 <body>
-    
+    <script>
+        alert("Log-in to enter the website");
+    </script>
+
    <main>
+    <div class="overlay"></div>
+    <form action="">
+        <div class="login-container">
+            <h3><i class="fa-brands fa-x-twitter"></i></h3>
+            <hr>   
+            <h3>Sign in as @renzymigz</h3>
+            <div class="input-container">
+                <i class="fa-solid fa-circle-user"></i>
+                <!--EMAIL FORM-->
+                <input type="email" id="email" placeholder="Email" required>
+            </div>
+            
+            <div class="input-container">
+                <i class="fa-solid fa-lock"></i>
+                 <!--PASSWORD FORM-->
+                <input type="password" id="password" placeholder="Password" required>
+            </div>
+            
+            <div class="remember-box">
+                <label><input type="checkbox"> Keep me signed in <i>(It doesn't work)</i>.</label> <br>
+            </div>
+            <br>
+            <button type="button" class="submit-button">SIGN IN </button>
+        
+            <div class="forgot">
+            <a href="" onclick="forgotPassword()">Forgot your password?</a> 
+            </div>
+            </div>
+    </form>
+    
         <div id="section">
             <div class="header">
                 <div class="text-header">
@@ -485,7 +653,7 @@
             <div class="banner">
                 <img src="https://i.ibb.co/NTS899K/luffy.jpg" alt="banner" onclick="openModalBanner()">
             </div>
-
+            
             <div class="container-bio">
                 <div class="profile-image">
                     <img src="https://i.ibb.co/M5gy79c/vegapunk.jpg" alt="profile picture" onclick="openModalProfile()">
@@ -606,6 +774,30 @@
    </main>
 
    <script>
+        // LOGIN CONTAINER
+        function hideLogin() {
+                var overlay = document.querySelector('.overlay');
+                var loginContainer = document.querySelector('.login-container');
+                overlay.style.display = 'none';
+                loginContainer.style.display = 'none';
+        }
+
+        document.querySelector('.submit-button').addEventListener('click', function() {
+            var emailInput = document.getElementById('email');
+            var passwordInput = document.getElementById('password');
+            
+            if (emailInput.checkValidity() && passwordInput.checkValidity()) {
+                hideLogin();
+            } else {
+                emailInput.reportValidity();
+                passwordInput.reportValidity();
+            }
+        });
+
+        function forgotPassword(){
+            alert("Same, I also forgot my password too!");
+        }
+        
         var incrementButton = document.getElementById("incrementButton");
         var likeButton = document.getElementById("likeButton");
         var retweetButton = document.getElementById("retweetButton");
